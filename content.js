@@ -1,31 +1,43 @@
+//Send author and title to server
+function sendData(author, title, book_image) { 
+    let data = title + " " + author
+    fetch('http://127.0.0.1:5000/available', {
+        method: 'POST',
+        body: JSON.stringify({ "data": data }),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+        })
+        .then(function(response){
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+            console.log(response)
+            return response.text()})
+        .then(function(text){  
+            if ( text == "1"){
+                book_image.style.border = "2px solid green";
+            }
+            else{
+                book_image.style.border = "2px solid red";
+            }
+            })
+        .catch(error => {
+        console.error('Error:', error);
+        });
+    }
 
-
-
-fetch("https://calgary.overdrive.com/search?query=A+Bigger+Prize+margaret+heffernan") 
-    .then(function(response) {
-       
-        return response.text();
-
-    })
-    .then( function(html){
-        
-        let parser = new DOMParser();
-       
-        const doc = parser.parseFromString(html, "text/html");
-        const loan_status = doc.querySelector("section#search");
-        console.log(loan_status);
-        return 1;
-    });
 
 const book_image = document.querySelector("img.ResponsiveImage");
-
-book_image.style.border = "2px solid red";
+//book_image.style.border = "2px solid red";
 
 const book_title = document.querySelector(".Text.Text__title1");
+const title = book_title.textContent;
 
-book_title.style.color = "red";
+const book_author = document.querySelector(".ContributorLink__name");
+const author = book_author.textContent;
 
-let text = book_title.textContent;
+sendData(author, title, book_image);
 
 
 
