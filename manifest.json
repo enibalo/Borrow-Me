@@ -1,12 +1,13 @@
 {
     "manifest_version": 3,
-    "name": "Hello Extensions",
-    "description": "Base Level Extension",
+    "name": "Borrow Me!",
+    "description": "Check if a book is available at the Calgary Public Library, while you're on Goodreads.",
     "version": "1.0",
     "action": {
       "default_popup": "./home.html",
       "default_icon": "./images/logo.png"
     },
+
 
     "content_scripts": [
       {

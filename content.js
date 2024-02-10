@@ -13,14 +13,14 @@ function sendData(author, title, book_image) {
             if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`);
             }
-            return response.text()})
-        .then(function(text){ 
-            //If book is available make the border green, if not make it red  
-            if ( text == "1"){
-                book_image.style.border = "2px solid green";
+            return response.json()})
+        .then(function(data){ 
+            //If book is available make the border around the book image green, if not make it red  
+            if ( data.available == "1"){
+                book_image.style.border = "5px solid #377458";
             }
             else{
-                book_image.style.border = "2px solid red";
+                book_image.style.border = "5px solid red";
             }
             })
         .catch(error => {
