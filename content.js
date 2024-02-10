@@ -1,6 +1,7 @@
 //Send author and title to server
+//The server will respond with the books availibility 
 function sendData(author, title, book_image) { 
-    let data = title + " " + author
+    let data = title + " " + author;
     fetch('http://127.0.0.1:5000/available', {
         method: 'POST',
         body: JSON.stringify({ "data": data }),
@@ -12,9 +13,9 @@ function sendData(author, title, book_image) {
             if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`);
             }
-            console.log(response)
             return response.text()})
-        .then(function(text){  
+        .then(function(text){ 
+            //If book is available make the border green, if not make it red  
             if ( text == "1"){
                 book_image.style.border = "2px solid green";
             }
@@ -28,8 +29,8 @@ function sendData(author, title, book_image) {
     }
 
 
+//Collect necessary data from Goodreads page
 const book_image = document.querySelector("img.ResponsiveImage");
-//book_image.style.border = "2px solid red";
 
 const book_title = document.querySelector(".Text.Text__title1");
 const title = book_title.textContent;
