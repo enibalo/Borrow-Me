@@ -1,11 +1,10 @@
 # This is Borrow Me! 
 
-A Chrome extension which automatically checks the availability of Goodreads books at the Calgary Public Library (CPL). 
+A Chrome extension which checks the availability of Goodreads books at the Calgary Public Library. 
 Spoiler! Most of the time they are unavailable, but this extension is meant to make the treasure hunt for your next book easier. 
 
 # 🌟 Motivation
-I created this extension because all the books I was interested in on Goodreads were always unavailable once I switched tabs to check the Calgary Public Library Overdrive.
-To reduce the time I spent looking for a book, and increase the time I spent reading it I created Borrow Me. 
+I created this extension because I wanted to reduce the time I spent looking for a book ( and switching tabs), and increase the time I spent reading.
 
 # 🚀 QuickStart
 This extension uses the following Python packages, download them if you don't have them using pip: 
