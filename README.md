@@ -15,8 +15,8 @@ Flask, Selenium, Beautiful Soup, and lxml
 2. Remove the app.py file and place it outside of the borrow-me folder you unzipped. (Chrome extensions can not have py files in them).
 3. Execute the following command in the terminal: cd C:/{your_path_file_to}/app.py inside your terminal.
 4. Once you're in the same folder of app.py in the terminal. Execute the following commands to turn on the Flask Server:
-  export FLASK_APP=app.py 
-  python -m flask run
+  * export FLASK_APP=app.py 
+  * python -m flask run
   (If you are on Windows use set instead of export)
 5. Go to: chrome://extensions and turn on Developer mode.
 6.  Click on the load unpacked button, and select the borrow-me folder you unzipped. Done! You've added Borrow Me to your extensions.
