@@ -20,7 +20,7 @@ Flask, Selenium, Beautiful Soup, and lxml
   (If you are on Windows use set instead of export)
 5. Go to: chrome://extensions and turn on Developer mode.
 6.  Click on the load unpacked button, and select the borrow-me folder you unzipped. Done! You've added Borrow Me to your extensions.
-7.  Go to a Goodreads page that contains /book/show in the URL. Finally, Borrow-Me! might be in allow-access in your extension ( the puzzle piece button on chrome) so click on it to give it full access.
+7.  Go to a Goodreads page that contains /book/show in the URL. Finally, Borrow-Me! might be in allow-access in your extension ( the puzzle piece button on Chrome) so click on it to give it full access.
 9.  Wait around 8s, the book will be highlighted red (unavailable)  or green (available).
 *The Flask Server is responsible for searching the Overdrive website, it must be turned on for the extension to work*
 
