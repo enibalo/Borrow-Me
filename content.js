@@ -1,10 +1,9 @@
 //Send author and title to server
 //The server will respond with the books availibility 
 function sendData(author, title, book_image) { 
-    let data = title + " " + author;
     fetch('http://127.0.0.1:5000/available', {
         method: 'POST',
-        body: JSON.stringify({ "data": data }),
+        body: JSON.stringify({ "author": author, "title": title}),
         headers: {
         'Content-Type': 'application/json'
         }
