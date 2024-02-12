@@ -5,8 +5,12 @@
     "version": "1.0",
     "action": {
       "default_popup": "./home.html",
-      "default_icon": "./images/logo.png"
+      "default_icon": "./images/icon-16.png"
     },
+
+    "icons": { "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+   "128": "images/icon-128.png" },
 
 
     "content_scripts": [
