@@ -3,6 +3,8 @@
     "name": "Borrow Me!",
     "description": "Check if a book is available at the Calgary Public Library, while you're on Goodreads.",
     "version": "1.0",
+    "permissions": "tabs",
+    "host_permissions": ["htttp://*/*", "https://*/*"],
     "action": {
       "default_popup": "./home.html",
       "default_icon": "./images/icon-16.png"
