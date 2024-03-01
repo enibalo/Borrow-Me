@@ -3,13 +3,13 @@
     "name": "Borrow Me!",
     "description": "Check if a book is available at the Calgary Public Library, while you're on Goodreads.",
     "version": "1.0",
-    "permissions": "tabs",
-    "host_permissions": ["htttp://*/*", "https://*/*"],
     "action": {
       "default_popup": "./home.html",
       "default_icon": "./images/icon-16.png"
     },
-
+    "background":{
+      "service_worker": "background.js"
+    },
     "icons": { "16": "images/icon-16.png",
     "48": "images/icon-48.png",
    "128": "images/icon-128.png" },
@@ -20,7 +20,8 @@
         "js": ["content.js"],
         "matches": [
           "https://www.goodreads.com/book/show/*",
-          "https://www.goodreads.com/en/book/show/*"
+          "https://www.goodreads.com/en/book/show/*",
+          "https://calgary.overdrive.com/*"
         ]
       }
     ]
