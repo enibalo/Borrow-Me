@@ -9,7 +9,6 @@ async function sendData(myAuthor, myTitle) {
  
     //next step: check if overdrive already in page if so, re-use. 
     //set up ticket system, and alert tab when its their turn
-    //also correct the URL, why %20 and not + showing up =( bot-like)
     console.log(newUrl);
     await chrome.tabs.create({active: false, url: newUrl})
 }

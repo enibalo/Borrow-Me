@@ -1,6 +1,4 @@
 
-
-
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
     if (message.type == "update-goodreads"){
         console.log(message);
@@ -43,7 +41,7 @@ if (title.textContent.search(/OverDrive/) !=  -1){
     console.log("hi");
     const head = document.querySelector("head");
     const scripts = head.querySelectorAll("script");
-    let [text] = scripts[7].textContent.match(/\[.[^;]*/);
+    let [text] = scripts[8].textContent.match(/\[.*(?=;\n)/);
     console.log(text);
     let results = JSON.parse(text);
    
