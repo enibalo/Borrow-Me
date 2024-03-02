@@ -25,6 +25,8 @@ const title = document.querySelector("title");
 const book_image = document.querySelector("img.ResponsiveImage");
 
 if (title.textContent.search(/Goodreads/) !=  -1){
+    //next step (trivial): insert css to have more permanent changes.
+    //next step: instead of querying right a way, get a ticket number, and wait your turn  
     const book_title = document.querySelector(".Text.Text__title1");
     const title = book_title.textContent;
 
@@ -37,16 +39,22 @@ if (title.textContent.search(/Goodreads/) !=  -1){
 
 
 if (title.textContent.search(/OverDrive/) !=  -1){
+    //next step (trivial): show the wait time for the book as well, add it to popup.html
+    console.log("hi");
     const head = document.querySelector("head");
     const scripts = head.querySelectorAll("script");
-    const [text] = scripts[7].textContent.match(/\[.[^;]*/);
-    const results = JSON.parse(text);
-
+    let [text] = scripts[7].textContent.match(/\[.[^;]*/);
+    console.log(text);
+    let results = JSON.parse(text);
+   
     let answer = false; 
     for (let i = 0; i < results.length; i ++ ){
+        console.log("traversal of json");
+        console.log(results[i]);
     if( results[i].isAvailable == true){
             answer = true;
             break;
+            
     }
     } 
     let message = {type: "send-query-results", available: answer };

@@ -1,22 +1,17 @@
 async function sendData(myAuthor, myTitle) {
-    let myUrl = "https://calgary.overdrive.com/search/title?query=";
+    const url = new URL("https://calgary.overdrive.com/search/title?");
     myAuthor = myAuthor.toLowerCase();
     myTitle = myTitle.toLowerCase();
-
-    myTitle.split().forEach( (word, index) =>{ 
-        if (word == "&"){
-            word = "%26";
-        }
-        myUrl += (word + "+")});
-    
-    myUrl = myUrl.slice(0,myUrl.length - 1);
-    myUrl += "&creator="
-    myAuthor.split().forEach( (word, index) => myUrl += (word + "+"));
-    myUrl = myUrl.slice(0,myUrl.length - 1);
-    myUrl += "&sortBy=newlyadded";
-    
-    
-    await chrome.tabs.create({active: false, url: myUrl})
+    const params = new URLSearchParams(url.search);
+    params.append("query", myTitle);
+    params.append("creator", myAuthor);
+    const newUrl = new URL(`${url.origin}${url.pathname}?${params}`).toString();
+ 
+    //next step: check if overdrive already in page if so, re-use. 
+    //set up ticket system, and alert tab when its their turn
+    //also correct the URL, why %20 and not + showing up =( bot-like)
+    console.log(newUrl);
+    await chrome.tabs.create({active: false, url: newUrl})
 }
 
 let availability = false; 
