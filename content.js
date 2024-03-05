@@ -19,6 +19,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
     })
     .then(() => console.log("CSS injected")); */
 //Start Goodreads. 
+
 const title = document.querySelector("title");
 const book_image = document.querySelector("img.ResponsiveImage");
 
@@ -31,18 +32,19 @@ if (title.textContent.search(/Goodreads/) !=  -1){
     const book_author = document.querySelector(".ContributorLink__name");
     const author = book_author.textContent;
 
-    let message = {type: "query-overdrive", author: author, title: title, }
+    let message = {type: "query-overdrive", author: author, title: title};
     chrome.runtime.sendMessage(message);
 }
 
 
 if (title.textContent.search(/OverDrive/) !=  -1){
-    //next step (trivial): show the wait time for the book as well, add it to popup.html
-    console.log("hi");
+    //next step (trivial): show the wait time for the book as well, add it to popup.html as a text message!
+    //nest step check if this tab is the queryed tab or random tab before sending message
     const head = document.querySelector("head");
     const scripts = head.querySelectorAll("script");
     let [text] = scripts[8].textContent.match(/\[.*(?=;\n)/);
     console.log(text);
+    //MAKE JSON.PARSE A PROMISE SO PROGRAM WAITS FOR IT TO FINISH
     let results = JSON.parse(text);
    
     let answer = false; 
@@ -51,15 +53,15 @@ if (title.textContent.search(/OverDrive/) !=  -1){
         console.log(results[i]);
     if( results[i].isAvailable == true){
             answer = true;
-            break;
-            
+            break;         
     }
     } 
-    let message = {type: "send-query-results", available: answer };
+    let message = {type: "send-query-results", available: answer};
     chrome.runtime.sendMessage(message);
 
 }
 
 //End Goodreads
- 
+
+
 

@@ -1,4 +1,4 @@
-async function sendData(myAuthor, myTitle) {
+async function sendData(myAuthor, myTitle, tabID) {
     const url = new URL("https://calgary.overdrive.com/search/title?");
     myAuthor = myAuthor.toLowerCase();
     myTitle = myTitle.toLowerCase();
@@ -6,24 +6,26 @@ async function sendData(myAuthor, myTitle) {
     params.append("query", myTitle);
     params.append("creator", myAuthor);
     const newUrl = new URL(`${url.origin}${url.pathname}?${params}`).toString();
- 
+    
     //next step: check if overdrive already in page if so, re-use. 
-    //set up ticket system, and alert tab when its their turn
-    console.log(newUrl);
-    await chrome.tabs.create({active: false, url: newUrl})
+    //set up ticket system, and alert tab when its their turn;
+    chrome.storage.session.get(["overdriveID"]).then( (items) => {
+        chrome.tabs.update(parseInt(items.overdriveID), {url: newUrl, openerTabId: tabID});
+    }).catch( (error) => {
+        chrome.tabs.create({active: false, url: newUrl, openerTabId: tabID })
+        .then( (tab) => {
+            chrome.storage.session.set({"overdriveID": tab.id});
+        })
+        .catch((error) => { console.log("Creating overdrive tab failed", error)});
+    });
 }
-
-let availability = false; 
+//on tab deleted event  of overdriveID, then set overdriveID to nulll 
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse ){
     if (message.type == "query-overdrive"){
-            sendData(message.author, message.title).catch( (error) => console.error("Error in creating tab", error));
+            sendData(message.author, message.title, sender.tab.id).catch( (error) => console.error("Error in creating tab", error));
     }
-    else if (message.type == "send-query-results"){
-        chrome.tabs.query({active:true, currentWindow: true })
-        .then( (tabs) =>{
-            chrome.tabs.sendMessage(tabs[0].id, {type: "update-goodreads", available: message.available})
-        })
-        .catch( (error) => console.error("Error in updating goodreads", error));
+    else if (message.type == "send-query-results"){  
+        chrome.tabs.sendMessage(sender.tab.openerTabId, {type: "update-goodreads", available: message.available}); 
     }
 });
