@@ -18,14 +18,14 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
       css : css,
     })
     .then(() => console.log("CSS injected")); */
+
 //Start Goodreads. 
 
 const title = document.querySelector("title");
 const book_image = document.querySelector("img.ResponsiveImage");
 
 if (title.textContent.search(/Goodreads/) !=  -1){
-    //next step (trivial): insert css to have more permanent changes.
-    //next step: instead of querying right a way, get a ticket number, and wait your turn  
+    //next step (trivial): insert css to have more permanent changes. 
     const book_title = document.querySelector(".Text.Text__title1");
     const title = book_title.textContent;
 
@@ -35,16 +35,16 @@ if (title.textContent.search(/Goodreads/) !=  -1){
     let message = {type: "query-overdrive", author: author, title: title};
     chrome.runtime.sendMessage(message);
 }
-
+// try one minute cooling period?
+// add catch blocks to error stuff 
 
 if (title.textContent.search(/OverDrive/) !=  -1){
     //next step (trivial): show the wait time for the book as well, add it to popup.html as a text message!
-    //nest step check if this tab is the queryed tab or random tab before sending message
     const head = document.querySelector("head");
     const scripts = head.querySelectorAll("script");
     let [text] = scripts[8].textContent.match(/\[.*(?=;\n)/);
     console.log(text);
-    //MAKE JSON.PARSE A PROMISE SO PROGRAM WAITS FOR IT TO FINISH
+    
     let results = JSON.parse(text);
    
     let answer = false; 

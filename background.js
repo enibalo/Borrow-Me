@@ -7,11 +7,11 @@ async function sendData(myAuthor, myTitle, tabID) {
     params.append("creator", myAuthor);
     const newUrl = new URL(`${url.origin}${url.pathname}?${params}`).toString();
     
-    //next step: check if overdrive already in page if so, re-use. 
-    //set up ticket system, and alert tab when its their turn;
     chrome.storage.session.get(["overdriveID"]).then( (items) => {
-        chrome.tabs.update(parseInt(items.overdriveID), {url: newUrl, openerTabId: tabID});
-    }).catch( (error) => {
+        let id = parseInt(items.overdriveID);
+        chrome.tabs.update(id, {url: newUrl, openerTabId: tabID});
+    })
+    .catch((error) => {
         chrome.tabs.create({active: false, url: newUrl, openerTabId: tabID })
         .then( (tab) => {
             chrome.storage.session.set({"overdriveID": tab.id});
@@ -19,7 +19,7 @@ async function sendData(myAuthor, myTitle, tabID) {
         .catch((error) => { console.log("Creating overdrive tab failed", error)});
     });
 }
-//on tab deleted event  of overdriveID, then set overdriveID to nulll 
+
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse ){
     if (message.type == "query-overdrive"){
@@ -29,3 +29,13 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse ){
         chrome.tabs.sendMessage(sender.tab.openerTabId, {type: "update-goodreads", available: message.available}); 
     }
 });
+
+
+chrome.tabs.onRemoved.addListener( function(tabId, removeInfo){
+    chrome.storage.session.get(["overdriveID"]).then( (items) =>{
+        if ( parseInt(items.overdriveID) == tabId ){
+            chrome.storage.session.remove(["overdriveID"]);
+        }
+        });
+    }
+  )
