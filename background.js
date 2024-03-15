@@ -9,7 +9,7 @@ async function sendData(myAuthor, myTitle, tabID) {
     
     chrome.storage.session.get(["overdriveID"]).then( (items) => {
         let id = parseInt(items.overdriveID);
-        chrome.tabs.update(id, {url: newUrl, openerTabId: tabID});
+        chrome.tabs.update(id, {url: newUrl, openerTabId: tabID}).catch((error) => {console.log("Messaging Overdrive tab failed" + myTitle, error) }); ;
     })
     .catch((error) => {
         chrome.tabs.create({active: false, url: newUrl, openerTabId: tabID })
@@ -26,7 +26,8 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse ){
             sendData(message.author, message.title, sender.tab.id).catch( (error) => console.error("Error in creating tab", error));
     }
     else if (message.type == "send-query-results"){  
-        chrome.tabs.sendMessage(sender.tab.openerTabId, {type: "update-goodreads", available: message.available}); 
+        chrome.tabs.sendMessage(sender.tab.openerTabId, {type: "update-goodreads", available: message.available, wait: message.wait, author: message.author, title: message.title})
+        .catch((error) => {console.log("Messaging Goodreads failed", error) }); 
     }
 });
 

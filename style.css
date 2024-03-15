@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  padding: 2vh 5vh;
+  padding-top: 0vh;
+  font-family: system-ui;
+  background-color: white;
+  text-align: center;
+  width: 200px;
+  background-color: #fbeecb;
+
+}
+
+p {
+  text-align: left;
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-size: 12px;
+  color: #342929;
+  background-color:#FFB900;
+  padding: 10px;
+  border-radius: 11px;
+  margin: 0px;
+}
+
+div{
+  width: 100%;
+}
+.tick{
+  width: 0px;
+  height: 0px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 10px solid #FFB900;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  top: -5px;
+  right: -5px;
+  margin-bottom: 10px;
+}
+
+footer {
+  font-size: 10px;
+  margin-top: 10px;
+  text-align: center; 
+  color: grey;
+  width: inherit;
+}
+
+
+h3{
+  margin-top: 2vh;
+  color: #342929;
+  font-weight: 300;
+  border-bottom: 1px solid  #342929;
+}
