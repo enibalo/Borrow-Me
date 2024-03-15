@@ -7,7 +7,10 @@
       "default_popup": "./home.html",
       "default_icon": "./images/icon-16.png"
     },
-    "permissions": ["storage"],
+    "host_permissions": [
+      "https://calgary.overdrive.com/*"
+    ],
+    "permissions": ["storage", "scripting"],
     "background":{
       "service_worker": "background.js"
     },

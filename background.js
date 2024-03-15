@@ -9,11 +9,14 @@ async function sendData(myAuthor, myTitle, tabID) {
     
     chrome.storage.session.get(["overdriveID"]).then( (items) => {
         let id = parseInt(items.overdriveID);
-        chrome.tabs.update(id, {url: newUrl, openerTabId: tabID}).catch((error) => {console.log("Messaging Overdrive tab failed" + myTitle, error) }); ;
+        chrome.tabs.update(id, {url: newUrl, openerTabId: tabID}).catch((error) => {console.log("Messaging Overdrive tab failed" + myTitle, error) }); 
+        chrome.scripting.executeScript({ target : {tabId : id}, files : [ "overdrive.js" ] });
+
     })
     .catch((error) => {
         chrome.tabs.create({active: false, url: newUrl, openerTabId: tabID })
         .then( (tab) => {
+            chrome.scripting.executeScript({ target : {tabId : tab.id}, files : [ "overdrive.js" ] });
             chrome.storage.session.set({"overdriveID": tab.id});
         })
         .catch((error) => { console.log("Creating overdrive tab failed", error)});

@@ -1,5 +1,5 @@
 function addTextMessage(message ){
-    
+    if (message == "") return;
     console.log(message);
     let  text = "Title:" + message.title + "<br />";
     text += "Author:" + message.author + "<br />";
@@ -21,7 +21,6 @@ function addTextMessage(message ){
     document.querySelector(".main").appendChild(div);
 };
 
-//will onyl run when open so it must message broswer
 //id thing is broken lol again 
 //execute script instead for overdrive
 
