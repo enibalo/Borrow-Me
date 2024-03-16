@@ -1,6 +1,5 @@
 function addTextMessage(message ){
     if (message == "") return;
-    console.log(message);
     let  text = "Title:" + message.title + "<br />";
     text += "Author:" + message.author + "<br />";
     for (let i = 0; i < message.wait.length; i ++){
@@ -20,9 +19,6 @@ function addTextMessage(message ){
     p.innerHTML = text;  
     document.querySelector(".main").appendChild(div);
 };
-
-//id thing is broken lol again 
-//execute script instead for overdrive
 
 
 chrome.tabs.query({active: true, lastFocusedWindow: true})

@@ -10,13 +10,17 @@ async function sendData(myAuthor, myTitle, tabID) {
     chrome.storage.session.get(["overdriveID"]).then( (items) => {
         let id = parseInt(items.overdriveID);
         chrome.tabs.update(id, {url: newUrl, openerTabId: tabID}).catch((error) => {console.log("Messaging Overdrive tab failed" + myTitle, error) }); 
-        chrome.scripting.executeScript({ target : {tabId : id}, files : [ "overdrive.js" ] });
-
     })
     .catch((error) => {
         chrome.tabs.create({active: false, url: newUrl, openerTabId: tabID })
         .then( (tab) => {
-            chrome.scripting.executeScript({ target : {tabId : tab.id}, files : [ "overdrive.js" ] });
+            function listener(tabId, changeInfo, tab) {
+                // make sure the status is 'complete' and it's the right tab
+                if (tabId === tab.id && changeInfo.status == 'complete') {
+                     chrome.scripting.executeScript({ target : {tabId : tab.id}, files : [ "overdrive.js" ] , injectImmediately: false});
+                }
+            };
+            chrome.tabs.onUpdated.addListener(listener);
             chrome.storage.session.set({"overdriveID": tab.id});
         })
         .catch((error) => { console.log("Creating overdrive tab failed", error)});
@@ -24,6 +28,17 @@ async function sendData(myAuthor, myTitle, tabID) {
 }
 
 
+
+/*
+myTab => {
+    function listener(tabId, changeInfo, tab) {
+        // make sure the status is 'complete' and it's the right tab
+        if (tabId === myTab.id && changeInfo.status == 'complete') {
+             chrome.scripting.executeScript({ target : {tabId : tab.id}, files : [ "overdrive.js" ] , injectImmediately: false});
+        }
+    };
+    chrome.tabs.onUpdated.addListener(listener);
+}); */
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse ){
     if (message.type == "query-overdrive"){
             sendData(message.author, message.title, sender.tab.id).catch( (error) => console.error("Error in creating tab", error));
