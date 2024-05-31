@@ -1,5 +1,4 @@
-
- 
+//Handles updating the availability of a book on a Goodreads page, one a response is received. 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
     if (message.type == "update-goodreads"){
         messagePopup = {wait : message.wait, author: message.author, title: message.title};
@@ -24,7 +23,7 @@ const book_image = document.querySelector("img.ResponsiveImage");
 let messagePopup = "";
 
 
-
+//Scans a Goodreads page for the book name, then sends a request to check for the book's avaiability. 
 if (web_title.textContent.search(/Goodreads/) !=  -1){ 
     const book_title = document.querySelector(".Text.Text__title1");
     const title = book_title.textContent;

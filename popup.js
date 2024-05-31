@@ -44,6 +44,7 @@ function getWaitTime(wait){
     return result;
 }
 
+//Adds text message of a book's exact availability to the popup's html page.
 function addTextMessage(message ){
     if (message == "") return;
     let  text = "Title: " + message.title + "<br />";
@@ -66,7 +67,7 @@ function addTextMessage(message ){
     document.querySelector(".main").appendChild(div);
 };
 
-
+//Requests for the current Goodread page's book availabilty, and then adds a text message to the popup. 
 chrome.tabs.query({active: true, lastFocusedWindow: true})
 .then(function(tabs){
     let tab = tabs[0];
