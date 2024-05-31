@@ -33,7 +33,7 @@ async function sendData(myAuthor, myTitle, tabID) {
 
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse ){
-    //Handles an availability request from Goodreads. 
+    //Handles an availability request from Goodreads    . 
     if (message.type == "query-overdrive"){
             sendData(message.author, message.title, sender.tab.id).catch( (error) => console.error("Error in creating tab", error));
     }
