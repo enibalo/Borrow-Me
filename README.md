@@ -2,7 +2,7 @@
 
 A Chrome extension which checks the availability of Goodreads books at the Calgary Public Library.  
 
-Spoiler Alert! Most of the time they are unavailable, but this extension is meant to make the treasure hunt for your next book easier. It's approximately 7x faster than the traditional way of checking a book's availability.
+Spoiler Alert! Most of the time they are unavailable, but this extension is meant to make the treasure hunt for your next book easier. It's approximately **7x faster than the traditional way of checking a book's availability**.
 
 # 🌟 Motivation
 I created this extension because I wanted to reduce the time I spent looking for a book ( and switching between tabs) and increase my reading time.
