@@ -1,7 +1,7 @@
     //Checks for a  book's avaialbilty on Overdrive. 
     const head = document.querySelector("head");
     const scripts = head.querySelectorAll("script");
-    let [text] = scripts[7].textContent.match(/\[.*(?=;\n)/);
+    let [text] = scripts[5].textContent.match(/\[.*(?=;\n)/);
    
     
     let results = JSON.parse(text);
