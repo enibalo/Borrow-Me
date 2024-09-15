@@ -1,5 +1,11 @@
 function getWaitTime(wait){
     let result = "Wait time: ";
+
+    if (wait == -1){
+        result += " N/A";
+        return result;
+    }
+
     let years = Math.floor(wait/365);
     wait = wait - (years * 365); 
     let months = Math.floor(wait/30); 
